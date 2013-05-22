@@ -157,3 +157,9 @@ body {
   font-size: 3.3em;
   color:black;
 }
+
+.reveal section img.logo {
+  margin: 0px;
+  border: none;
+  box-shadow: none;
+}
