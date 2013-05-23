@@ -4,14 +4,8 @@
 * What it Catches
 * What it misses
 * The Tools
-  * CodeNarc
-  * Cobertura
-  * JSLint
-  * CSSLint(?)
-  * Task List (ToDo search)
 * Jenkins
 * Dealing with Old Code
-* Demo
 
 
 
@@ -20,16 +14,13 @@
 Information about your code that is properties of your code. Mostly obtained by looking at your code statically not looking at runtime or dynamic data.
 
 
-## blah
-
-
 
 ## What it Catches
 
 Items there are 'easy' rules to enforce.
 
 
-## Unessiary gstring
+## Unnessiary gstring
 
 In Groovy:
 
@@ -106,11 +97,113 @@ There is a grails plugin that you can use to give you CodeNarc. BuildConfig:
 	}
 
 
+## CodeNarc - Config for Rules
+
+I use the properties file for adjusting indvidual rules.
+
+	GrailsPublicControllerMethod.enabled=false
+	CatchException.enabled=false
+	CatchThrowable.enabled=false
+	ThrowException.enabled=false
+	ThrowRuntimeException.enabled=false
+	GrailsStatelessService.enabled=false
+	NestedBlockDepth.maxNestedBlockDepth=3
+
+You will want the first line as it is the work around for [GPCODENARC-30](http://jira.grails.org/browse/GPCODENARC-30)
+	
+
+
 ## CodeNarc - Additional Dependancies
 
-Some rules require more dependancies then what is included in grails, gmetrics jar.
+Some rules will need some extra config, adding GMetrics will allow many rules of the size.xml file to work.
 
     dependencies {
       compile 'org.gmetrics:GMetrics:0.6'
       ...
-   	}
+    }
+
+
+
+## Cobertura
+
+A code coverage tool for the jvm, used via the code coverage grails plugin.
+
+[Code Coverage](http://grails.org/plugin/code-coverage)
+
+	plugins {
+      test ":code-coverage:1.2.6"
+      ...
+    }
+
+
+## Cobertura - Config
+
+In BuildConfig.groovy you can set up exclusions like the following:
+
+    coverage {
+	  exclusions = [
+	    '**/radar/**',
+        '**/FacebookConfig*'
+        ]
+    }
+
+
+## Cobertura - Running
+
+Most of the time you will be running this on the CI which you should be passing the xml flag.
+
+    grails test-app -coverage -xml
+
+
+
+## JSLint
+
+*Warning*: JSLint will hurt your feelings. - [JSLint](http://www.jslint.com/lint.html)
+
+JavaScript plays a big part of most web applications so we need to treat it with the same rigor as our Groovy code.
+
+
+## JSLint - Config
+
+In a JSLintConfig.groovy file
+
+	jslint.options = "white"
+	jslint.directory = "web-app/js"
+	jslint.includes = "**/*.js"
+	jslint.excludes = "**/*.min.js, **/i18n/**/*.js, **/prototype/*.js,**/*-min.js,**/*.pack.js"
+	jslint.haltOnFailure = false
+	jslint.preDef = "\$"
+	jslint.reports = {
+
+		MyXmlReport('xml') {                    // The report name "MyXmlReport" is user-defined; Report type is 'xml'
+			destfile = 'target/test-reports/jslint.xml'  // Set the 'outputFile' property of the (XML) Report
+		}
+		MyHtmlReport('report') {                  // Report type is 'html'
+			destfile = 'target/test-reports/jslint.html'
+		}
+	}
+
+
+
+## Other Tools
+
+* [CSSLint](http://csslint.net/)
+* [JSHint](http://www.jshint.com/) - _Nicer JSLint_
+* [SCSS Lint](https://github.com/causes/scss-lint)
+
+
+
+## Jenkins
+
+Use Jenkins paired with a number of plugins to really trend and deal with all this information.
+
+* [Violations](https://wiki.jenkins-ci.org/display/JENKINS/Violations)
+* [Cobertura Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Cobertura+Plugin)
+* [Task Scanner Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Task+Scanner+Plugin)
+
+
+## Violations
+
+This will parse JSLint and CodeNarc xml files allowing us to trend the number of warnings. It will group the type of violation into high, normal, and low priorities. 
+
+The plugin also allows us to set 
