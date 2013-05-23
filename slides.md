@@ -2,7 +2,7 @@
 
 * What is Static Analysis
 * What it Catches
-* What it misses
+* What it Misses
 * The Tools
 * Jenkins
 * Dealing with Old Code
@@ -20,7 +20,7 @@ Information about your code that is properties of your code. Mostly obtained by 
 Items there are 'easy' rules to enforce.
 
 
-## Unnessiary gstring
+## Unnecessary gstring
 
 In Groovy:
 
@@ -46,12 +46,12 @@ vs
 
 ## What it misses
 
-The archetectural desisions you have made. For example chosing to always use mixins for adding shared functionalaity to controllers vs using inheritance. Just archetectural flaws in general. 
+The architectural decisions you have made. For example choosing to always use mixins for adding shared functionality to controllers vs using inheritance. Just architectural flaws in general.
 
 
 ## What it misses
 
-In general these tools are not going to help you from doing something silly like having a great distrubuted system that that all depends on a single MySQL node.
+In general these tools are not going to help you from doing something silly like having a great distributed system that that all depends on a single MySQL node.
 
 
 
@@ -99,7 +99,7 @@ There is a grails plugin that you can use to give you CodeNarc. BuildConfig:
 
 ## CodeNarc - Config for Rules
 
-I use the properties file for adjusting indvidual rules.
+I use the properties file for adjusting individual rules.
 
 	GrailsPublicControllerMethod.enabled=false
 	CatchException.enabled=false
@@ -113,7 +113,7 @@ You will want the first line as it is the work around for [GPCODENARC-30](http:/
 	
 
 
-## CodeNarc - Additional Dependancies
+## CodeNarc - Additional Dependencies
 
 Some rules will need some extra config, adding GMetrics will allow many rules of the size.xml file to work.
 
@@ -270,7 +270,7 @@ In Jeknins you see sunny, stormy, or yellow ball. Sunny is great while stormy is
 
 * Sunny - Where you want your project in the short term
 * Stormy - Where you are now or what you consider bad
-* Yellow Ball - Slightly lower then the current state to prevent you from regressing
+* Yellow Ball - Slightly lower than the current state to prevent you from regressing
 
 
 ## Pick your battles
