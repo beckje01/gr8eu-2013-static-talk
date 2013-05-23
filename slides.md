@@ -20,15 +20,15 @@ Information about your code that is properties of your code. Mostly obtained by 
 Items there are 'easy' rules to enforce.
 
 
-## Unnecessary gstring
-
+<!-- ## Unnecessary gstring
+///FIXME Remove this add a new example easy catch.
 In Groovy:
 
-`println "Bob's your uncle!"`
+`println "Bob your uncle!"`
 
 vs
 
-`println 'Bob\'s your uncle'`
+`println 'Bob\'s your uncle'` -->
 
 
 ## Missing Triple Equals
