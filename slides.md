@@ -123,6 +123,17 @@ Some rules will need some extra config, adding GMetrics will allow many rules of
     }
 
 
+## CodeNarc - Suppress False Positives
+
+Use an annotation to suppress any false positives
+
+    @SuppressWarnings('DuplicateStringLiteral')
+      class MyClass {
+      	def x = 'x'
+      	def y = 'x'
+      }
+
+
 
 ## Cobertura
 
@@ -160,6 +171,19 @@ Most of the time you will be running this on the CI which you should be passing 
 * Report 100% coverage for one build
 * Underreport branch coverage
 * Underreport overall coverage
+
+
+
+## CodeNarc + Cobertura
+
+[C.R.A.P. Metric](http://www.artima.com/weblogs/viewpost.jsp?thread=210575) With both CodeNarc and Cobertura we can get the CRAP metric working.
+
+
+## CRAP Meteric
+
+In the codenarc.properties file set the following:
+
+    CrapMetric.coberturaXmlFile=file:target/test-reports/cobertura/coverage.xml
 
 
 
