@@ -155,6 +155,13 @@ Most of the time you will be running this on the CI which you should be passing 
     grails test-app -coverage -xml
 
 
+## Cobertura - Warnings
+
+* Report 100% coverage for one build
+* Underreport branch coverage
+* Underreport overall coverage
+
+
 
 ## JSLint
 
@@ -202,8 +209,75 @@ Use Jenkins paired with a number of plugins to really trend and deal with all th
 * [Task Scanner Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Task+Scanner+Plugin)
 
 
+## Jenkins
+
+![Screen of trends](images/jenkins-trends.png)
+
+
+
 ## Violations
 
 This will parse JSLint and CodeNarc xml files allowing us to trend the number of warnings. It will group the type of violation into high, normal, and low priorities. 
 
-The plugin also allows us to set 
+The plugin also allows us to set acceptable levels of violations.
+
+
+## Violations - Config
+
+![Violations Config](images/violations-setup.png)
+
+
+## Violations - Config
+
+![Violations Config 1](images/violations-setup1.png)
+![Violations Config 2](images/violations-setup2.png)
+![Violations Config 3](images/violations-setup3.png)
+
+
+
+## Cobertura Jenkins Plugin
+
+![Covertura Graph](images/coverage-graph.png)
+
+
+## Cobertura Jenkins Plugin - Config
+
+![Covertura Config](images/coverage-config.png)
+
+
+
+## Task Scanner 
+
+![Task Scanner Overview](images/taskscanner-overview.png)
+
+
+## Task Scanner - Config
+
+![Task Scanner Config](images/taskscanner-setup.png)
+
+
+
+## Dealing with Old Code
+
+* Set a Baseline
+* Pick your Battles
+* Keep the Signal
+
+
+## Setting a Baseline
+
+In Jeknins you see sunny, stormy, or yellow ball. Sunny is great while stormy is there is something wrong while yellow is considered unstable.
+
+* Sunny - Where you want your project in the short term
+* Stormy - Where you are now or what you consider bad
+* Yellow Ball - Slightly lower then the current state to prevent you from regressing
+
+
+## Pick your battles
+
+Turn off rules that are too hard to fix at this time or you have already made a decision that is against a rule. 
+
+
+## Keep the Signal
+
+Look for general trends. As well as cutting out any junk from the tools.
